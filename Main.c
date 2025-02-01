@@ -1,10 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 void game(char playerInput){
     //this will take player and computer input, then calculate and declare the winner in 'winner'and update score
-    
+        //first computer takes input
+        srand(time(0));
+        char array[3];
+        ///allocation memory
+        array [0] = malloc(strlen("r") +1);
+        array [1] = malloc(strlen("p")+1);
+        array [2] = malloc(strlen("s") + 1);
+
+        char comput = array[rand()%3]; 
+        
+        
 }
 
 
@@ -28,7 +39,7 @@ int main(){
         
         
     }
-    
+    //remember to free up memory to avoid memory leaks
     
     return 0;
 }
