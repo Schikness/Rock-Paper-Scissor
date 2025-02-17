@@ -7,7 +7,7 @@ void game(char playerInput){
     //this will take player and computer input, then calculate and declare the winner in 'winner'and update score
         //first computer takes input
         srand(time(0));
-        char array[3];
+        char array[3];  
         ///allocation memory
         array [0] = malloc(strlen("r") +1);
         array [1] = malloc(strlen("p")+1);
