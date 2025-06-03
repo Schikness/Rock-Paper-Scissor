@@ -168,6 +168,8 @@ Why This Fix Works:
     free(winner);
     free(playerScore);
     free(computerScore);
+    free(round);
+    free (bestOf);
     
     return 0;
 }
