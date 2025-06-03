@@ -9,6 +9,10 @@
 //update score
 
 
+//do best of code: give option to pick best of three or best of 5,
+
+
+
 void game(char playerInput, char *comput, char *winner, int *playerScore, int *computerScore){
     //pass variables as pointers
     //need pointers for malloc
@@ -76,19 +80,24 @@ int main(){
     char *winner = malloc(8);//max is computer which is 1x8=8 bytes so malloc(8)
     int *playerScore = malloc(sizeof(int));
     int *computerScore = malloc (sizeof(int));
-
+    int *bestOf = malloc(sizeof(int));
+    int *round = malloc(sizeof(int));
     // check for memory allocation error
-    if(input == NULL || comput == NULL || winner == NULL || playerScore == NULL || computerScore == NULL){
+    if(input == NULL || comput == NULL || winner == NULL || playerScore == NULL || computerScore == NULL || bestOf == NULL || round == NULL){
         printf("Memory Allocation Failed!");
         return 1;
     }
 
     *playerScore = 0;
     *computerScore = 0;
-
+    *bestOf = 0;
+    *round = 0;
+    printf("Play best of 3 or best of 5?\n");
+    scanf(" %d", bestOf);
     //player gives input rock paper or scissor, if wins gets score, else computer gets score, computer chooses a random 
-    while (1)
+    while (*round < *bestOf)
     {
+        
         //take input
         printf("Enter r for rock, p for paper and s for stone. to exit press y\n");
         //Add space before %c to ignore newline (\n) in buffer, else just prints invalid input everytime
@@ -116,9 +125,41 @@ int main(){
         printf("You entered: %c\n", *input);
         printf("computer entered: %c\n", *comput);
         printf("Winner: %s\n", winner);//when using %s for characters, dont use *winner because * refers to the char *winner, just use the pointer instead
-        printf("Score: You --> %d\nComputer --> %d\n", *playerScore, *computerScore);
-
         
+
+        (*round)++;
+        /*You're writing:
+
+            *round++;
+
+This does not increment the value pointed to by round.
+Instead, it increments the pointer itself (round) — not the value it points to.
+
+This messes up your memory and causes strange behavior, like "Invalid Input" (because the next scanf() might be reading garbage from an invalid pointer location).
+You need to increment the value pointed to by round, like this:
+
+(*round)++;
+
+This properly increases the integer stored at the memory location that round points to.
+Why This Fix Works:
+
+    round++ means "increment the pointer round" (moves the pointer by sizeof(int) bytes).
+
+    *round++ means "dereference the pointer, then increment the pointer" — it does not change the value.
+
+    (*round)++ means "increment the value pointed to by round" — this is what you actually want.*/
+
+
+        if(*round == *bestOf){
+            printf("Score: You --> %d\nComputer --> %d\n", *playerScore, *computerScore);
+            if(*playerScore > *computerScore){
+                printf("You Win!");
+            }
+            else if(*computerScore > *playerScore){
+                printf("You Lose!");
+            }
+            else{printf("It is a Draw");}
+        }
         
     }
     //remember to free up memory to avoid memory leaks
